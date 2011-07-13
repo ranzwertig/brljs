@@ -37,15 +37,17 @@ if(typeof brl === 'undefined') { brl = {}; }
       return this;
     },
     
+    // read signed Int 8 Bit big endian
     readInt8Be : function(offset){
       if(typeof offset === 'undefined'){
         offset = this._offset;
         this._offset += 1;
       }
       var value = this._data.charCodeAt(offset) & 0xFF;
-  	return value > 0x7F ? ((value - 1) ^ 0xFF ) * -1 : value;
+      return value > 0x7F ? ((value - 1) ^ 0xFF ) * -1 : value;
     },
     
+    // read signed Int 8 Bit little endian
     readInt8Le : function(offset){
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -55,6 +57,7 @@ if(typeof brl === 'undefined') { brl = {}; }
   	  return value > 0x7F ? ((value - 1) ^ 0xFF ) * -1 : value;
     },
     
+    // read signed Int 16 Bit big endian
     readInt16Be  : function(offset){
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -65,6 +68,7 @@ if(typeof brl === 'undefined') { brl = {}; }
   	  return value > 0x7FFF ? ((value - 1) ^ 0xFFFF ) * -1 : value;
     },
     
+    // read signed Int 16 Bit little endian
     readInt16Le  : function(offset){
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -75,6 +79,7 @@ if(typeof brl === 'undefined') { brl = {}; }
   	  return value > 0x7FFF ? ((value - 1) ^ 0xFFFF ) * -1 : value;
     },
     
+    // read signed Int 32 Bit big endian
     readInt32Be  : function(offset){
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -85,9 +90,10 @@ if(typeof brl === 'undefined') { brl = {}; }
         ((this._data.charCodeAt(offset+1) & 0xFF) << 16) +
         ((this._data.charCodeAt(offset+2) & 0xFF) << 8) +
         (this._data.charCodeAt(offset+3) & 0xFF);
-  	  return value > 0x7FFFFFFF ? ((value - 1) ^ 0xFFFFFFFF ) * -1 : value;
+      return value > 0x7FFFFFFF ? ((value - 1) ^ 0xFFFFFFFF ) * -1 : value;
     },
     
+    // read signed Int 32 Bit little endian
     readInt32Le  : function(offset){
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -100,6 +106,7 @@ if(typeof brl === 'undefined') { brl = {}; }
   	  return value > 0x7FFFFFFF ? ((value - 1) ^ 0xFFFFFFFF ) * -1 : value;
     },
     
+    // read unsigned Int 8 Bit big endian
     readUInt8Be : function(offset){  
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -107,6 +114,7 @@ if(typeof brl === 'undefined') { brl = {}; }
       }
       return this._data.charCodeAt(offset) & 0xFF;
     },
+    // read unsigned Int 8 Bit little endian
     readUInt8Le : function(offset){  
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -115,6 +123,7 @@ if(typeof brl === 'undefined') { brl = {}; }
       return this._data.charCodeAt(offset) & 0xFF;
     },
     
+    // read unsigned Int 16 Bit big endian
     readUInt16Be : function(offset){
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -124,6 +133,7 @@ if(typeof brl === 'undefined') { brl = {}; }
         (this._data.charCodeAt(offset+1) & 0xFF);
     },
     
+    // read unsigned Int 16 Bit little endian
     readUInt16Le : function(offset){
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -133,6 +143,7 @@ if(typeof brl === 'undefined') { brl = {}; }
         (this._data.charCodeAt(offset) & 0xFF);
     },
     
+    // read unsigned Int 32 Bit big endian
     readUInt32Be : function(offset){ 
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -144,6 +155,7 @@ if(typeof brl === 'undefined') { brl = {}; }
         (this._data.charCodeAt(offset+3) & 0xFF)) >>> 0;
     },
     
+    // read unsigned Int 32 Bit little endian
     readUInt32Le : function(offset){ 
       if(typeof offset === 'undefined'){
         offset = this._offset;
@@ -155,8 +167,10 @@ if(typeof brl === 'undefined') { brl = {}; }
         (this._data.charCodeAt(offset) & 0xFF)) >>> 0;
     },
     
+    // read a 8 Bit char
     readChar:	function (offset) { return this.readString(1, offset); },
     
+    // read a String of length: length, Bytes
     readString: function (length, offset) {
   	 if(typeof offset === 'undefined'){
          offset = this._offset;
@@ -167,10 +181,13 @@ if(typeof brl === 'undefined') { brl = {}; }
   	 return result;
     },
     
+    // get the current reader offset
     currentOffset : function(){ return this._offset; },
     
+    // get the data size
     size : function(){ return this._data.length; },
   	
+  	// check if there a neededBytes left to read
     _checkSize: function (neededBytes, offset) {
       if(typeof offset === 'undefined'){
         offset = this._offset;
