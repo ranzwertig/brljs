@@ -193,11 +193,10 @@ if(typeof brl === 'undefined') { brl = {}; }
         offset = this._offset;
         this._offset += length;
       }
-  	if (!(offset + neededBytes < this._data.length)) {
-  		return false;
-  	}
-  	return true;
+      if (!(offset + neededBytes < this._data.length)) {
+  		  return false;
+      }
+  	 return true;
     }
-    
   };
 }(brl));
