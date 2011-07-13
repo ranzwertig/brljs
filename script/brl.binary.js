@@ -1,3 +1,16 @@
+/**
+ * Library to load and parse binary data from a file.
+ * It is able to handle following binary number types;
+ * - 8  Bit Int little/big endian signed and unsigned
+ * - 16 Bit Int little/big endian signed and unsigned
+ * - 32 Bit Int little/big endian signed and unsigned
+ *
+ * @namespace: brl.binary
+ * @author: Christian Ranz <info@christianranz.com>
+ * @version: 0.1
+ * @licence: MIT 
+ */
+
 if(typeof brl === 'undefined') { brl = {}; }
 
 (function(brl){
