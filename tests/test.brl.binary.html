@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title></title>
+		
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<!-- content here -->
+		<h1>brl.binary Tests</h1>
+		<!-- scripts -->
+		<script src="../script/brl.js"></script>
+		<script src="../script/brl.util.barrier.js"></script>
+		<script src="../script/brl.log.js"></script>
+		<script src="../script/brl.binary.js"></script>
+		<script src="../script/brl.test.js"></script>
+		
+		<script>		
+		  /*console.log(((0xff<<24)>>>0).toString(2));
+		  console.log(((0xff<<24)+(0xff<<16)).toString(2));
+		  console.log(((0xff<<24)+(0xff<<16)+(0xff<<8)).toString(2));
+		  console.log(((0xff<<24)+(0xff<<16)+(0xff<<8)+(0xff)).toString(2));
+		  console.log((((0xff<<24)+(0xff<<16)+(0xff<<8)+(0xff)>>>0)).toString(2));*/	  
+			  
+			  
+		  var testSet = new brl.test.TestSet({
+		    id : 10000,
+		    name : 'BinaryReader tests',
+		    description : 'the BinaryReader is able to load a binary file and read binary data from it'
+		  });
+		  
+		  var reader = new brl.binary.BinaryReader();
+		  reader.loadFile('brljs/tests/f7.bin');
+		  
+		  testSet.add({
+		    id : 100,
+		    name : '8 Bit Int BE signed min',
+		    description : '',
+		    test : function(test){
+		      test.equal(reader.readInt8Be(), -128);
+		    }
+		  });
+		  testSet.add({
+		    id : 101,
+		    name : '8 Bit Int BE signed max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt8Be(), 127);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 200,
+		    name : '16 Bit Int BE signed min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt16Be(), -32768);
+		    }
+		  });
+		  testSet.add({
+		    id : 201,
+		    name : '16 Bit Int BE signed max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt16Be(), 32767);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 300,
+		    name : '32 Bit Int BE signed min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt32Be(), -2147483648);
+		    }
+		  });
+		  testSet.add({
+		    id : 301,
+		    name : '32 Bit Int BE signed max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt32Be(), 2147483647);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 400,
+		    name : '8 Bit Int BE unsigned min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt8Be(), 0);
+		    }
+		  });
+		  testSet.add({
+		    id : 401,
+		    name : '8 Bit Int BE unsigned max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt8Be(), 255);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 500,
+		    name : '16 Bit Int BE unsigned min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt16Be(), 0);
+		    }
+		  });
+		  testSet.add({
+		    id : 501,
+		    name : '16 Bit Int BE unsigned min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt16Be(), 65535);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 600,
+		    name : '32 Bit Int BE unsigned min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt32Be(), 0);
+		    }
+		  });
+      testSet.add({
+        id : 601,
+        name : '32 Bit Int BE unsigned max', 
+        description : '', 
+        test : function(test){
+		      test.equal(reader.readUInt32Be(), 4294967295);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 700,
+		    name : '8 Bit Int LE signed min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt8Le(), -128);
+		    }
+		  });
+		  testSet.add({
+		    id : 701,
+		    name : '8 Bit Int LE signed max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt8Le(), 127);
+		    }
+		  });
+		  
+		  testSet.add({
+		  id : 800,
+		  name : '16 Bit Int LE signed min', 
+		  description : '', 
+		  test : function(test){
+		    test.equal(reader.readInt16Le(), -32768);
+		  }
+		  });
+		  testSet.add({
+		    id : 801,
+		    name : '16 Bit Int LE signed max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt16Le(), 32767);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 900,
+		    name : '32 Bit Int LE signed min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt32Le(), -2147483648);
+		    }
+		  });
+		  testSet.add({
+		    id : 901,
+		    name : '32 Bit Int LE signed max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readInt32Le(), 2147483647);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 1000,
+		    name : '8 Bit Int LE unsigned min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt8Le(), 0);
+		    }
+		  });
+		  testSet.add({
+		    id : 1001,
+		    name : '8 Bit Int LE unsigned max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt8Le(), 255);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 1100,
+		    name : '16 Bit Int LE unsigned min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt16Le(), 0);
+		    }
+		  });
+		  testSet.add({
+		    id : 1101,
+		    name : '16 Bit Int LE unsigned max', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt16Le(), 65535);
+		    }
+		  });
+		  
+		  testSet.add({
+		    id : 1200,
+		    name : '32 Bit Int LE unsigned min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt32Le(), 0);
+		    }
+		  }); 
+		  testSet.add({
+		    id : 1201,
+		    name : '32 Bit Int LE unsigned min', 
+		    description : '', 
+		    test : function(test){
+		      test.equal(reader.readUInt32Le(), 4294967295);
+		    }
+		  });
+		  
+		  var stop = new Date().getMilliseconds();
+		  
+		  testSet.run('all');
+		</script>
+	</body>
+</html>
