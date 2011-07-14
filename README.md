@@ -1,7 +1,7 @@
 brljs
 -----
 
-my personal Javascript frontend lib providing some useful stuff like:
+a Javascript frontend lib providing some useful stuff like:
 
 - a Barrier
 - a JS test environment
